@@ -3,6 +3,9 @@ var stars = [];
 var speed;
 var _speed = 150
 
+function preload() {
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (var i = 0; i < 800; i++) {
@@ -10,38 +13,58 @@ function setup() {
   }
 }
 
+function istruzioni(_x, _y, _cap, _size) {
+  noStroke();
+  textSize(_size)
+  textFont("Righteous");
+  textAlign(CENTER);
+  text(_cap, _x, _y)
+}
+
 function draw() {
-    background(30);
+  background(30);
   var testo = "press and hold to accelerate"
   if (keyIsPressed === true) {
-       for (var j = 0; j <= 10; j+= 1) {
-         _speed += 1.5;
-         testo = "relase to return to normal speed"
-       }
-     } else {
-       _speed = 100
-     }
+    for (var j = 0; j <= 10; j += 1) {
+      _speed += 1.5;
+      testo = "relase to return to normal speed"
+    }
+  } else {
+    _speed = 100
+  }
 
-    if (_speed >= 3000) {
-       background("red");
-       testo = "";
-       push()
-         noStroke();
-         textSize(windowWidth/20);
-         textFont("Righteous");
-         textAlign(CENTER);
-         text("DANGER! LUDICROUS SPEED", windowWidth/2, windowHeight/2)
-        pop()
+  if (_speed >= 5000) {
+    background("red");
+    testo = "";
+    push()
+      istruzioni(windowWidth / 2, windowHeight / 2, "DANGER! LUDICROUS SPEED", windowWidth / 20)
+    pop()
+    push()
+      istruzioni(windowWidth / 2, windowHeight / 2 + windowHeight / 20, "RELASE IMMEDIATLY ALL THE KEY", windowWidth / 80)
+    pop()
+  }
 
-        push()
-          noStroke();
-          textSize(windowWidth/80);
-          textFont("Righteous");
-          textAlign(CENTER);
-          text("RELASE IMMEDIATLY ALL THE KEY", windowWidth/2, windowHeight/2+windowHeight/20)
-         pop()
+  if (_speed >= 8000) {
+    background(255)
+    noLoop()
+    fill("black")
+    istruzioni(windowWidth / 2, windowHeight / 2 - windowHeight / 20, "COMPLIMENTS,", windowWidth / 20)
+    istruzioni(windowWidth / 2, windowHeight / 2 + windowHeight / 20, "YOU HAVE BROKEN THE SPACE", windowWidth / 20)
 
-     }
+    button = createButton('PRESS TO RESTORE IT');
+    button.style('background-color', 'black');
+    button.style('color', 'white')
+    button.style('padding', '15px');
+    button.style('border-radius', '5px');
+    button.position(windowWidth / 2-80, windowHeight / 2 + windowHeight / 10);
+    button.mousePressed(restore);
+
+  }
+
+function restore() {
+  loop()
+  button.hide()
+}
 
   speed = map(_speed, 0, width, 0, 50);
 
@@ -53,11 +76,7 @@ function draw() {
 
   //velocità smodata
   push()
-    noStroke()
-    textSize(24);
-    textFont("Righteous");
-    textAlign(CENTER);
-    text(testo, 0, windowHeight/2.5)
+    istruzioni(0, windowHeight / 2.5, testo, 24)
   pop()
 
 }
