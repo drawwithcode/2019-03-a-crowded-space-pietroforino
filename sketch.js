@@ -4,6 +4,7 @@ var speed;
 var _speed = 150;
 
 function preload() {
+  jesus = loadImage("jesus.png")
 }
 
 function setup() {
@@ -62,7 +63,13 @@ function draw() {
     button.position(windowWidth / 2-80, windowHeight / 2 + windowHeight / 10);
     button.mousePressed(restore);
 
+//img
+    image(jesus, 0,0)
+
   }
+
+
+
 // restore the game by clicking on the button
 
 function restore() {
