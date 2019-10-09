@@ -64,7 +64,7 @@ function draw() {
     button.mousePressed(restore);
 
 //img
-    image(jesus, 0,0)
+    image(jesus, windowWidth/2,windowHeight/2+200,200)
 
   }
 
